@@ -29,8 +29,26 @@
             <td>{{reg.LastName}}</td>
             <td>{{reg.year}}</td>
             <td>{{reg.City}}</td>
+            <td>
+              <button v-on:click="add" class="btn btn-primary">добавить</button>
+            </td>
           </tr>
         </tbody>
+         <table class="table">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="reg2 in reg">
+            <td>{{reg2.FirstName}}</td>
+            <td>{{reg2.LastName}}</td>
+           </tr>
+        </tbody>
+      </table>
       </table>
     </div>
   </div>
@@ -55,8 +73,11 @@ export default {
       rega: {
         'FirstName': '',
         'LastName': ''
+      },
+      reg: {
+        'FirstName': '1',
+        'LastName': '1'
       }
-
     }
   },
   methods: {
@@ -68,6 +89,15 @@ export default {
       obj.FirstName = this.rega.FirstName
       obj.LastName = this.rega.LastName
       this.regs.push(obj)
+    },
+    add: function () {
+      var clone = {
+        'FirstName': '',
+        'LastName': ''
+      }
+      clone.FirstName = this.reg.FirstName
+      clone.LastName = this.reg.LastName
+      this.reg.push(clone)
     }
   }
 }

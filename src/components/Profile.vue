@@ -6,12 +6,15 @@
         <img align="left" class="fb-image-lg" src="http://lorempixel.com/850/280/nightlife/5/" alt="Profile image example">
         <img align="left" class="fb-image-profile thumbnail" src="http://lorempixel.com/180/180/people/9/" alt="Profile image example">
         <div class="fb-profile-text">
-            <h1>Eli Macy</h1>
-            <p>Girls just wanna go fun.</p>
+            <h1>First Name</h1>
+            <p>Last Name</p>
+            <p>Years</p>
+            <p id="blok1">City</p>
         </div>
     </div>
 </div> <!-- /container -->  
 </div>
+
 </template>
 
 <script>
@@ -19,6 +22,12 @@
 </script>
 
 <style >
+#blok1 {
+ position:relative;
+left:140px;
+
+
+}
  body
 {
     font-family: 'Open Sans', sans-serif;
@@ -52,4 +61,5 @@
     width: 20%; 
 }
 }
+
 </style>

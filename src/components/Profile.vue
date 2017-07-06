@@ -4,46 +4,44 @@
         <img align="left" class="fb-image-lg" src="http://lorempixel.com/850/280/nightlife/5/" alt="Profile image example">
         <img align="left" class="fb-image-profile thumbnail" src="http://lorempixel.com/180/180/people/9/" alt="Profile image example">
         <div class="fb-profile-text">
-            <h1>First Name</h1>
-            <p>Last Name</p>
-            <p>Years</p>
-            <p id="blok1">City</p>
+            <h1 id="blok1">First Name</h1>
+            <h1 id="blok2">Last Name</h1>
+            <h3 id="blok3">Years</h3>
+            <h3 id="blok4">City</h3>
+            <h3 id="blok5">Друзья</h3>
         </div>
     </div>
     <div class="friends">
     <div class="container">
-      <form class="form-inline">
-        <label class="sr-only" for="inlineFormInput">Login</label>
-        <input type="text" v-model.trim="newfriend.FirstName" class="form-control mb-2 mr-sm-2 mb-sm-0"  id="inlineFormInput" placeholder="Login">
+        <form class="form">
+                <input  class="form-control" type="text" placeholder="Поиск" id="example-text-input" v-model="search">
+            </form>
+      <form id="form-inline"class="form-inline">
+        <label class="sr-only" for="inlineFormInput">Имя</label>
+        <input type="text" v-model.trim="newfriend.FirstName" class="form-control mb-2 mr-sm-2 mb-sm-0"  id="inlineFormInput" placeholder="Имя">
   
-        <label class="sr-only" for="inlineFormInputGroup">Password</label>
+        <label class="sr-only" for="inlineFormInputGroup">Фамилия</label>
         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
           
-          <input type="text" v-model.trim="newfriend.LastName" class="form-control" id="inlineFormInputGroup" placeholder="Password">
+          <input type="text" v-model.trim="newfriend.LastName" class="form-control" id="inlineFormInputGroup" placeholder="Фамилия">
         </div>
   
         <button v-on:click="addnewfriends" v-if="!edit" class="btn btn-primary">Добавить</button>
           <button v-on:click="endedit" v-if="edit" class="btn btn-warning">Сохранить</button>
       </form>
-      {{newfriend}}
-      <table class="table">
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Year</th>
-            <th>City</th>
-          </tr>
+ 
+      <table  id="table" class="table table-bordered">
+          <thead>
+          <th>Имя</th>
+            <th>Фамилия</th>
         </thead>
         <tbody>
-          <tr v-for="friendd in friends">
+          <tr v-for="friendd in contactList">
             <td>{{friendd.FirstName}}</td>
-            <td>{{friendd.LastName}}</td>
-            <td>{{friendd.year}}</td>
-            <td>{{friendd.City}}</td>
+            <td >{{friendd.LastName}}</td>
             <td>
             <button v-on:click="editfriends(friendd)" v-if="!edit" class="btn btn-warning">Изменить</button>
-            <button v-on:click="deletefriends(friendd)" v-if="!edit" class="btn btn-warning">удалить</button>
+            <button v-on:click="deletefriends(friendd)" v-if="!edit" class="btn btn-danger">удалить</button>
             </td>
           </tr>
         </tbody>
@@ -60,18 +58,25 @@ export default {
   name: 'friends',
   data () {
     return {
-      friends: [
-        {
-          'id': 1,
-          'FirstName': 'Alice',
-          'LastName': 'Floera'
-        }
-      ],
+      friends: [],
       edit: false,
       newfriend: {
         'FirstName': '',
         'LastName': ''
+      },
+      search: ''
+    }
+  },
+  computed: {
+    contactList: function () {
+      var search = this.search
+      var filterFn = function (item) {
+        return item.FirstName.includes(search) || item.LastName.includes(search)
       }
+      if (this.search !== '') {
+        return this.friends.filter(filterFn)
+      }
+      return this.friends
     }
   },
   methods: {
@@ -110,12 +115,53 @@ export default {
 
 </script>
 <style>
+
 #blok1 {
  position:relative;
-left:140px;
-
-
+right:330px;
+top: -110px;
 }
+#blok2 {
+ position:relative;
+right:-30px;
+top: -160px;
+}
+#blok3 {
+ position:relative;
+right:245px;
+top: -160px;
+}
+#blok4 {
+ position:relative;
+right:255px;
+top: -165px;
+}
+#blok5 {
+ position:relative;
+right:390px;
+top: -165px;
+}
+#table{
+     position:relative;
+right:0px;
+top: -165px;
+}
+#form-inline{
+     position:relative;
+right:0px;
+top: -190px;
+}
+#example-text-input{
+position:relative;
+right:0px;
+top: -110px;
+}
+#table{
+  position:relative;
+right:0px;
+top: -140px;  
+}
+
  body
 {
     font-family: 'Open Sans', sans-serif;
